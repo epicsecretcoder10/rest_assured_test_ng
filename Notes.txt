@@ -1,0 +1,6 @@
+Gherkin language used.
+
+given() - pre-condition
+when() - when there is an action
+then() - for validation
+and() - and
