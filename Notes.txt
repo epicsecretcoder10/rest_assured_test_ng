@@ -4,3 +4,16 @@ given() - pre-condition
 when() - when there is an action
 then() - for validation
 and() - and
+
+Content Type is used to specify content type of the Request Body.
+
+APRIL:
+    then().
+    log().ifValidationFails().
+    assertThat().
+        statusCode(200);
+
+       3 git commands
+        git add .
+        git commit -m"getContactListAPI test added"
+        git push
