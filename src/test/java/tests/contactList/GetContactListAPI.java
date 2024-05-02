@@ -1,10 +1,16 @@
 package tests.contactList;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import utilities.ContactListTestBase;
+import utilities.ContactListUtils;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import static io.restassured.RestAssured.given;
 
@@ -43,5 +49,30 @@ public class GetContactListAPI extends ContactListTestBase {
                         statusCode(200).
                         contentType(ContentType.JSON).
                         log().all().extract().jsonPath();
+    }
+
+    public void getContactListTestWithUtil() throws JsonProcessingException {
+
+        JsonPath jsonPath =
+                given().
+                        accept(ContentType.JSON).
+                        header("Authorization", ContactListUtils.getToken("bendover@meme.com", "6qDRijk7u6Z!5ku")).
+                        when().
+                        get("/contacts").
+                        then().
+                        assertThat().
+                        statusCode(200).
+                        contentType(ContentType.JSON).
+                        log().all().extract().jsonPath();
+
+        List contacts = jsonPath.getList("");
+        System.out.println("Number of Contacts" + contacts.size());
+
+        List contactNames = jsonPath.getList("firstName");
+        System.out.println("Contact first names: " + contactNames);
+
+        Assert.assertTrue(contactNames.contains("Saad"));
+
+
     }
 }
