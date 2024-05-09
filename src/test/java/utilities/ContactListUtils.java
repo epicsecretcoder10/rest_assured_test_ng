@@ -2,8 +2,13 @@ package utilities;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.restassured.builder.RequestSpecBuilder;
+import io.restassured.builder.ResponseSpecBuilder;
+import io.restassured.filter.log.LogDetail;
 import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
+import io.restassured.specification.RequestSpecification;
+import io.restassured.specification.ResponseSpecification;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -36,4 +41,25 @@ public class ContactListUtils extends ContactListTestBase{
 
         return "Bearer " + token;
     }
+
+    public static RequestSpecification setRequestSpecification(ContentType contentType) throws JsonProcessingException {
+        RequestSpecification requestSpecification = new RequestSpecBuilder().
+                addHeader("Authorization", ContactListUtils.getToken("bendover@meme.com", "6qDRijk7u6Z!5ku")).
+                setContentType(ContentType.JSON).log(LogDetail.ALL).
+                setAccept(contentType).
+                build();
+
+        return requestSpecification;
+    }
+
+    public static ResponseSpecification setResponseSpecification(int statusCode, ContentType contentType) {
+        ResponseSpecification responseSpecification = new ResponseSpecBuilder().
+                expectStatusCode(statusCode).
+                expectContentType(contentType).log(LogDetail.ALL).
+                build();
+
+        return responseSpecification;
+    }
+
+
 }

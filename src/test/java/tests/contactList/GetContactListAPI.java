@@ -50,7 +50,7 @@ public class GetContactListAPI extends ContactListTestBase {
                         contentType(ContentType.JSON).
                         log().all().extract().jsonPath();
     }
-
+    @Test
     public void getContactListTestWithUtil() throws JsonProcessingException {
 
         JsonPath jsonPath =

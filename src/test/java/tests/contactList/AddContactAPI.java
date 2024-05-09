@@ -18,10 +18,10 @@ public class AddContactAPI extends ContactListTestBase {
     @Test
     public void addContactTest() throws JsonProcessingException {
         Map <String, Object> contactInfo = new HashMap<>();
-        contactInfo.put("firstName", "NOT");
-        contactInfo.put("lastName", "Ughur");
+        contactInfo.put("firstName", "Sam");
+        contactInfo.put("lastName", "Sung");
         contactInfo.put("birthdate", "2003-10-04");
-        contactInfo.put("email", "notughur@fake.com");
+        contactInfo.put("email", "samsung@fake.com");
         contactInfo.put("phone", "5726394926");
         contactInfo.put("street1", "647 Main Street");
         contactInfo.put("street2", "Apartment P");
@@ -46,7 +46,7 @@ public class AddContactAPI extends ContactListTestBase {
 
         String lastName = jsonPath.getString("lastName");
 
-        Assert.assertEquals(lastName, "Ughur");
+        Assert.assertEquals(lastName, "Sung");
 
         String id = jsonPath.getString("id");
 
